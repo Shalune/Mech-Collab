@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(MoveController))]
+[RequireComponent(typeof(VehicleController))]
 [RequireComponent(typeof(VehicleMovement))]
 [RequireComponent(typeof(Rigidbody2D))]
 public class Vehicle : MonoBehaviour {
@@ -10,7 +10,7 @@ public class Vehicle : MonoBehaviour {
 
 
 
-    private MoveController moveController;
+    private VehicleController moveController;
     private VehicleMovement movement;
     private Rigidbody2D rigidBody;
 
@@ -21,7 +21,7 @@ public class Vehicle : MonoBehaviour {
 
     protected void VehicleAwake()
     {
-        moveController = GetComponent<MoveController>();
+        moveController = GetComponent<VehicleController>();
         movement = GetComponent<VehicleMovement>();
         rigidBody = GetComponent<Rigidbody2D>();
         Debug.Log(rigidBody.gameObject.name);
