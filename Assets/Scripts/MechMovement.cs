@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MechMovement : VehicleMovement {
 
+
     public override void ApplyMovement(Rigidbody2D rigidBody, Vector2 input)
     {
         turnForce = input.x;
@@ -23,5 +24,7 @@ public class MechMovement : VehicleMovement {
         rigidBody.velocity = transform.up * runVelocity;
 
         rigidBody.AddTorque(turnForce * turnAccel * -1);
+
+
     }
 }

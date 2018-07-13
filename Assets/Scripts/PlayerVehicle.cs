@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerVehicle : Vehicle {
 
     protected CameraFollow cameraFollow;
+	public GameObject sirhonkleton;
 
     void Awake()
     {
@@ -16,5 +17,8 @@ public class PlayerVehicle : Vehicle {
     {
         VehicleUpdate();
         cameraFollow.UpdateCamera(transform);
+
+		//HONKHONKHONK
+		//sirhonkleton.transform.parent = transform;
     }
 }
