@@ -34,6 +34,7 @@ public class Vehicle : MonoBehaviour {
 
     protected void VehicleUpdate()
     {
+        Debug.Log(name);
         Vector2 input = moveController.GetInput();
         movement.ApplyMovement(rigidBody, input);
     }
