@@ -29,34 +29,11 @@ public class MoveController : MonoBehaviour {
 
 	void Update () {
         cameraFollow.UpdateCamera(transform);
-        GetInput();
-        ApplyMovement();
         
 	}
 
-    private void GetInput()
+    public Vector2 GetInput()
     {
-        turnForce = Input.GetAxis(horizontalAxisName);
-        float vertical = Input.GetAxis(verticalAxisName);
-        runVelocity = Mathf.Lerp(runVelocity, 0, runDecel);
-
-        if (vertical > 0)
-            runVelocity = Mathf.Lerp(runVelocity, forwardMax, forwardAccel);
-        else if (vertical < 0)
-            runVelocity = Mathf.Lerp(runVelocity, reverseMax * -1, reverseAccel);
-
-        //Debug.Log(runVelocity);
-    }
-
-    private void ApplyMovement()
-    {
-        Vector3 velocity = rigidBody.velocity;
-        rigidBody.velocity = Vector3.zero;
-        rigidBody.velocity = transform.up * runVelocity;
-
-        //Debug.Log(transform.forward * runVelocity);
-        //Debug.Log(rigidBody.velocity);
-
-        rigidBody.AddTorque(turnForce * turnAccel * -1);
+        return new Vector2(Input.GetAxis(horizontalAxisName), Input.GetAxis(verticalAxisName));
     }
 }

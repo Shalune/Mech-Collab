@@ -17,6 +17,6 @@ public class CameraFollow : MonoBehaviour {
         newPos += (Vector2)player.up * forwardOffset;
     
         transform.position = new Vector3(newPos.x, newPos.y, transform.position.z);
-        Debug.Log(newPos);
+        //Debug.Log(newPos);
     }
 }
