@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,17 +15,48 @@ public class MoveController : MonoBehaviour {
     public float turnMax;
     public float forwardMax;
     public float reverseMax;
+    public float runDecel;
+
+    private float runVelocity = 0f;
+    private float turnForce = 0f;
+
+    private CameraFollow cameraFollow;
+
+    void Awake()
+    {
+        cameraFollow = Camera.main.GetComponent<CameraFollow>();
+    }
 
 	void Update () {
-		
+        cameraFollow.UpdateCamera(transform);
+        GetInput();
+        ApplyMovement();
+        
 	}
 
     private void GetInput()
     {
-        float horizontal = Input.GetAxis(horizontalAxisName);
+        turnForce = Input.GetAxis(horizontalAxisName);
         float vertical = Input.GetAxis(verticalAxisName);
+        runVelocity = Mathf.Lerp(runVelocity, 0, runDecel);
 
-        //rigidBody.velocity.y = Mathf.Lerp(rigidBody.velocity.y, forwardMax, forwardAccel);
-        rigidBody.AddForce(new Vector2(horizontal, vertical));
+        if (vertical > 0)
+            runVelocity = Mathf.Lerp(runVelocity, forwardMax, forwardAccel);
+        else if (vertical < 0)
+            runVelocity = Mathf.Lerp(runVelocity, reverseMax * -1, reverseAccel);
+
+        //Debug.Log(runVelocity);
+    }
+
+    private void ApplyMovement()
+    {
+        Vector3 velocity = rigidBody.velocity;
+        rigidBody.velocity = Vector3.zero;
+        rigidBody.velocity = transform.up * runVelocity;
+
+        //Debug.Log(transform.forward * runVelocity);
+        //Debug.Log(rigidBody.velocity);
+
+        rigidBody.AddTorque(turnForce * turnAccel * -1);
     }
 }
