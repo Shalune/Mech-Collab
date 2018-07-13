@@ -489,3 +489,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationCatchupSpeed: 0.1
   positionCatchupSpeed: 0.5
+  forwardOffset: 1.7
